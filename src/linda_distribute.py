@@ -44,11 +44,22 @@ def linda_distribute_ordered(lindas, cpus):
     return cpu_array
 
 
+def linda_even_odd(linda, cpu):
+    cpu_array = list()
+    for i in range(linda):
+        cpu_array.append([j for j in range(i, cpu, linda)])
+    return cpu_array
+
+
 def print_lindas(cpu_array):
     for linda in range(len(cpu_array)):
         print(f"Linda {linda+1}: {' '.join([str(x) for x in cpu_array[linda]][:])}")
 
 
 if __name__ == "__main__":
-    cpu_list = linda_distribute_ordered(lindas=linda, cpus=cpus)
-    print_lindas(cpu_array=cpu_list)
+    # in order
+    print_lindas(cpu_array=linda_distribute_ordered(lindas=linda, cpus=cpus))
+
+    # Even odd numbers no order:
+    print("\n")
+    print_lindas(cpu_array=linda_even_odd(linda=linda, cpu=cpus))
